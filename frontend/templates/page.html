@@ -1,0 +1,30 @@
+<html>
+<head>
+    <script type = "text/javascript" language = "javascript">
+
+        function tet(){
+        $.ajax({
+            url: "http://localhost:8080/ExamenJee-Master-GestionGricole/api/rest/date",
+            type: "GET", //Or "DELETE" for http delete calls
+            dataType: 'json',
+        })
+            .done (function(data, textStatus, jqXHR) {
+                alert("Success: " + response);
+            })
+            .fail (function(jqXHR, textStatus, errorThrown) {
+                alert("Error");
+            })
+            .always (function(jqXHROrData, textStatus, jqXHROrErrorThrown) {
+                alert("complete");
+            });
+
+        }
+s    </script>
+
+    <button type="button" onclick='tet();'>Find Haddemine</button>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+
+    <script src="./js/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            $("#uploadBtn").click(function()
+            {
+                $('input[name="file"]').each(function(index, value)
+                {
+                    var file = value.files[0];
+                    if(file)
+                    {
+                        var formData = new FormData();
+                        formData.append('file', file);
+                        $.ajax({
+                            url : '/JerseyDemos/rest/upload/pdf',
+                            type : 'POST',
+                            data : formData,
+                            cache : false,
+                            contentType : false,
+                            processData : false,
+                            success : function(data, textStatus, jqXHR) {
+                                var message = jqXHR.responseText;
+                                $("#messages").append("<li>" + message + "</li>");
+                            },
+                            error : function(jqXHR, textStatus, errorThrown) {
+                                $("#messages").append("<li style='color: red;'>" + textStatus + "</li>");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<form action="api/customers" method="post" >
+    id  <input type="text" name="id" />
+    montant <input type="text" name="montant" />
+    desc <input type="text" name="phone-desc" />
+    <input id="uploadBtn" type="button" value="Ajouter Commande" />
+</form>
